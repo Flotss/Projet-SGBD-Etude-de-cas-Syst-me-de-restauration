@@ -25,11 +25,10 @@ public class LoginButtonController implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        Model model = GoodFoodApplication.MODEL;
         try {
-            model.setDbConnection(username.getText(), password.getText());
+            GoodFoodApplication.MODEL.setDbConnection(username.getText(), password.getText());
             GoodFoodApplication.STAGE.setScene(ScenesEnum.LANDINGPAGE.getScene());
-        } catch (SQLException e) {
+        } catch (Exception e) {
             error.setVisible(true);
             error.setText(e.getMessage());
             e.printStackTrace();

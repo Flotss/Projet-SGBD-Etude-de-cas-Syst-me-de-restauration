@@ -6,7 +6,8 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    public static Connection makeConnection(String user, String password) throws SQLException {
+    public static Connection makeConnection(String user, String password) throws SQLException, ClassNotFoundException {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
         Connection connection = DriverManager
                 .getConnection("jdbc:oracle:thin:@charlemagne.iutnc.univ-lorraine.fr:1521:infodb",
                                    user,

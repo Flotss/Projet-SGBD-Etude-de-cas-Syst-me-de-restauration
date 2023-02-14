@@ -9,7 +9,7 @@ public class Model {
 
     private Connection dbConnection;
 
-    public Model(String user, String password) throws SQLException {
+    public Model(String user, String password) throws SQLException, ClassNotFoundException {
         this.dbConnection = DBConnection.makeConnection(user, password);
     }
 
@@ -17,7 +17,7 @@ public class Model {
         this.dbConnection = null;
     }
 
-    public void setDbConnection(String user, String password) throws SQLException {
+    public void setDbConnection(String user, String password) throws SQLException, ClassNotFoundException {
         this.dbConnection = DBConnection.makeConnection(user, password);
     }
 
