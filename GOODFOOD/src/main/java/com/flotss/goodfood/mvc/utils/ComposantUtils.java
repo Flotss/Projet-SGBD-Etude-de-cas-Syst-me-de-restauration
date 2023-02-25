@@ -8,11 +8,13 @@ import javafx.scene.text.Font;
 
 public class ComposantUtils {
 
+    public static String FONT = "Arial";
+
     public static Label createLabel(String text, int size){
         Label label = new Label(text);
 
         // Set font
-        label.setFont(new Font("Arial", size));
+        label.setFont(new Font(FONT, size));
 
         return label;
     }
@@ -22,7 +24,7 @@ public class ComposantUtils {
         textField.setPromptText(text);
 
         // Set font
-        textField.setFont(new Font("Arial", size));
+        textField.setFont(new Font(FONT, size));
 
         return textField;
     }
@@ -31,7 +33,7 @@ public class ComposantUtils {
         TextArea textArea = new TextArea(text);
 
         // Set font
-        textArea.setFont(new Font("Arial", size));
+        textArea.setFont(new Font(FONT, size));
 
         return textArea;
     }
@@ -41,7 +43,7 @@ public class ComposantUtils {
         passwordField.setPromptText(text);
 
         // Set font
-        passwordField.setFont(new Font("Arial", size));
+        passwordField.setFont(new Font(FONT, size));
 
         return passwordField;
     }

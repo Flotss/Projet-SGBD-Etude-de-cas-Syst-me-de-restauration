@@ -2,6 +2,7 @@ package com.flotss.goodfood.mvc.scene;
 
 import com.flotss.goodfood.mvc.controller.LoginButtonController;
 import com.flotss.goodfood.mvc.utils.ComposantUtils;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -18,9 +19,10 @@ class LoginPage extends BorderPane {
 
     public LoginPage() {
         super();
-        // Top
 
-        Label topTitle = ComposantUtils.createLabel("Page de connexion", 30);
+
+        // Top
+        Label topTitle = ComposantUtils.createLabel("GoodFood", 30);
         topTitle.setPadding(new Insets(15, 0, 0, 0));
         setAlignment(topTitle, Pos.CENTER);
 
@@ -32,6 +34,7 @@ class LoginPage extends BorderPane {
         center.setAlignment(Pos.CENTER);
         center.setSpacing(7);
 
+        Label centerTitle = ComposantUtils.createLabel("Connexion", 24);
         Label errorLabel = ComposantUtils.createLabel("", 16);
         errorLabel.setTextFill(Color.RED);
         errorLabel.resize(getWidth(), getHeight());
@@ -52,7 +55,6 @@ class LoginPage extends BorderPane {
 
 
 
-
         HBox passwordBox = new HBox();
         passwordBox.setAlignment(Pos.CENTER);
         passwordBox.setSpacing(7);
@@ -64,12 +66,18 @@ class LoginPage extends BorderPane {
         passwordBox.getChildren().addAll(passwordLabel, passwordField);
 
 
-
         Button loginButton = new Button("Se connecter");
         loginButton.setFont(new Font("Arial", 18));
+
+
+        // Ajout des listeners
+        passwordBox.addEventHandler(ActionEvent.ACTION, new LoginButtonController(identifiantField, passwordField, errorLabel));
+        identifiantField.addEventHandler(ActionEvent.ACTION, new LoginButtonController(identifiantField, passwordField, errorLabel));
         loginButton.setOnAction(new LoginButtonController(identifiantField, passwordField, errorLabel));
 
-        center.getChildren().addAll(errorLabel,identifiantBox, passwordBox, loginButton);
+
+
+        center.getChildren().addAll(centerTitle, errorLabel, identifiantBox, passwordBox, loginButton);
 
     }
 
