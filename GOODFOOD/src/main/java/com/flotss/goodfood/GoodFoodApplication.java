@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class GoodFoodApplication extends Application {
 
@@ -15,11 +16,12 @@ public class GoodFoodApplication extends Application {
 
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
         GoodFoodApplication.STAGE = stage;
         GoodFoodApplication.MODEL = new Model();
+        MODEL.setDbConnection("test", "test");
 
-        Scene scene = ScenesEnum.LOGIN.getScene();
+        Scene scene = ScenesEnum.LANDINGPAGE.getScene();
         stage.setTitle("GoodFood");
         stage.setScene(scene);
         stage.show();

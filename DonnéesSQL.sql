@@ -6,6 +6,8 @@ drop table RESERVATION cascade constraints;
 drop table SERVEUR cascade constraints;
 drop table TABL cascade constraints;
 
+select * from reservation;
+
 
 -- Table plat
 -- DROP TABLE tabl;
@@ -54,13 +56,13 @@ insert into plat values(15,'filet de sole au beurre','Poisson',90,70);
 insert into plat values(16,'fois gras de lorraine','Entree',90,61);
 
 -- Table Serveur
-create table serveur
-(numserv number(2),
-email varchar2(255),
-passwd varchar2(255),
-nomserv varchar2(25),
-grade varchar2(20),
-primary key(numserv)
+create table serveur (
+    numserv number(2),
+    email varchar2(255),
+    passwd varchar2(255),
+    nomserv varchar2(25),
+    grade varchar2(20),
+    primary key(numserv)
 );
 
 -- Tuples de Serveur
@@ -69,19 +71,21 @@ insert into serveur values(2,'user2@mail.com','$xy#;em$$$$$1','Lilo Vito','serve
 insert into serveur values(3,'user3@mail.com','$ab#;em$$$$$2','Don Carl','serveur');
 insert into serveur values(4,'user4@mail.com','$cd#;em$$$$$3','Leo Jon','serveur');
 insert into serveur values(5,'user5@mail.com','$mm#;em$$$$$4','Dean Geak','gestionnaire');
+insert into serveur values(6,'test','test','Jean','Dujardin');
 
 
 -- Table reservation
 create table reservation
-(numres number(4),
-numtab number(4),
-datres date,
-nbpers number(2),
-datpaie date,
-modpaie varchar2(15),
-montcom number(8,2),
-primary key (numres),
-foreign key (numtab) references tabl(numtab)
+(
+    numres number(4),
+    numtab number(4),
+    datres date,
+    nbpers number(2),
+    datpaie date,
+    modpaie varchar2(15),
+    montcom number(8,2),
+    primary key (numres),
+    foreign key (numtab) references tabl(numtab)
 );
 
 -- Tuples de reservation
@@ -152,3 +156,11 @@ insert into affecter values(16,'10/09/2021',3);
 insert into affecter values(10,'11/09/2021',1);
 
 commit;
+
+select numtab from tabl
+minus
+select numtab from reservation where datres = to_date('10/09/2021 19:00','dd/mm/yyyy hh24:mi');
+
+
+select *
+from reservation

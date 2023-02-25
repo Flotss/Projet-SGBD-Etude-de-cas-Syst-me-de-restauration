@@ -1,9 +1,12 @@
 package com.flotss.goodfood.mvc.utils;
 
+import com.flotss.goodfood.component.NumberTextField;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class ComposantUtils {
@@ -29,6 +32,16 @@ public class ComposantUtils {
         return textField;
     }
 
+    public static TextField createNumberTextField(String text, int size){
+        NumberTextField textField = new NumberTextField();
+        textField.setPromptText(text);
+
+        // Set font
+        textField.setFont(new Font(FONT, size));
+
+        return textField;
+    }
+
     public static TextArea createTextArea(String text, int size){
         TextArea textArea = new TextArea(text);
 
@@ -46,5 +59,19 @@ public class ComposantUtils {
         passwordField.setFont(new Font(FONT, size));
 
         return passwordField;
+    }
+
+    public static VBox createVBox(int spacing){
+        VBox vBox = new VBox();
+        vBox.setSpacing(spacing);
+
+        return vBox;
+    }
+
+    public static HBox createHBox(int spacing){
+        HBox hBox = new HBox();
+        hBox.setSpacing(spacing);
+
+        return hBox;
     }
 }
