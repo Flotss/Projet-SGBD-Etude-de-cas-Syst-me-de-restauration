@@ -22,9 +22,18 @@ public class ComposantUtils {
         return label;
     }
 
-    public static TextField createTextField(String text, int size){
+    public static TextField createTextFieldPlHd(String text, int size){
         TextField textField = new TextField();
         textField.setPromptText(text);
+
+        // Set font
+        textField.setFont(new Font(FONT, size));
+
+        return textField;
+    }
+
+    public static TextField createTextField(String text, int size){
+        TextField textField = new TextField(text);
 
         // Set font
         textField.setFont(new Font(FONT, size));

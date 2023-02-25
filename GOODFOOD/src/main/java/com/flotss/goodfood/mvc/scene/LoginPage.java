@@ -50,7 +50,7 @@ class LoginPage extends BorderPane {
         Label identifiantLabel = ComposantUtils.createLabel("Identifiant", 18);
 
 
-        TextField identifiantField = ComposantUtils.createTextField("dupont276u", 16);
+        TextField identifiantField = ComposantUtils.createTextFieldPlHd("dupont276u", 16);
         identifiantBox.getChildren().addAll(identifiantLabel, identifiantField);
 
 

@@ -19,7 +19,7 @@ public class DBUtils {
         HBox hBoxMain = new HBox();
         VBox[] vBoxs = new VBox[metaData.getColumnCount()];
         for (int i = 1; i <= metaData.getColumnCount(); i++) {
-            System.out.print(metaData.getColumnName(i) + "\t".repeat(3));
+//            System.out.print(metaData.getColumnName(i) + "\t".repeat(3));
             vBoxs[i-1] = new VBox();
             vBoxs[i-1].getChildren().add(ComposantUtils.createLabel(metaData.getColumnName(i), 11));
             vBoxs[i-1].setBorder(Border.stroke(Color.BLACK));
@@ -31,7 +31,7 @@ public class DBUtils {
         System.out.println();
         while (resultSet.next()) {
             for (int i = 1; i <= metaData.getColumnCount(); i++) {
-                System.out.print(resultSet.getObject(i) + "\t".repeat(3));
+//                System.out.print(resultSet.getObject(i) + "\t".repeat(3));
 
                 // Verify if the object is null
                 if(resultSet.getObject(i) == null){

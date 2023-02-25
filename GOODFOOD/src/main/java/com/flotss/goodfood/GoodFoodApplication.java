@@ -21,7 +21,7 @@ public class GoodFoodApplication extends Application {
         GoodFoodApplication.MODEL = new Model();
         MODEL.setDbConnection("test", "test");
 
-        Scene scene = ScenesEnum.LANDINGPAGE.getScene();
+        Scene scene = ScenesEnum.PAGESERVEUR.getScene();
         stage.setTitle("GoodFood");
         stage.setScene(scene);
         stage.show();

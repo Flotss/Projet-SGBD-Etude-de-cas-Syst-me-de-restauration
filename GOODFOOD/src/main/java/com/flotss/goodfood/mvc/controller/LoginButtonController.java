@@ -26,7 +26,7 @@ public class LoginButtonController implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         try {
             GoodFoodApplication.MODEL.setDbConnection(username.getText(), password.getText());
-            GoodFoodApplication.STAGE.setScene(ScenesEnum.LANDINGPAGE.getScene());
+            GoodFoodApplication.STAGE.setScene(ScenesEnum.PAGESERVEUR.getScene());
 
             // Set stage in the middle of the screen with Screen.getPrimary().getVisualBounds().getWidth() and Screen.getPrimary().getVisualBounds().getHeight()
             GoodFoodApplication.STAGE.setX((Screen.getPrimary().getVisualBounds().getWidth() - GoodFoodApplication.STAGE.getWidth()) / 2);

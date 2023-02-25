@@ -41,7 +41,7 @@ public class ReserveTableButtonController implements EventHandler<ActionEvent> {
         } catch (Exception e) {
             successLabel.setVisible(false);
             errorLabel.setVisible(true);
-            errorLabel.setText("La table n°" + tableNumber.getValue() + " n'a pas pu être réservée pour le " + datePickerTable.getValue() + " à " + hourChoiceBox.getValue() + ". Veuillez réessayer.");
+            errorLabel.setText(e.getMessage()+"\nLa table n°" + tableNumber.getValue() + " n'a pas pu être réservée pour le " + datePickerTable.getValue() + " à " + hourChoiceBox.getValue() + ". Veuillez réessayer.");
             e.printStackTrace();
         }
 

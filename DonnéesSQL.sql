@@ -71,7 +71,8 @@ insert into serveur values(2,'user2@mail.com','$xy#;em$$$$$1','Lilo Vito','serve
 insert into serveur values(3,'user3@mail.com','$ab#;em$$$$$2','Don Carl','serveur');
 insert into serveur values(4,'user4@mail.com','$cd#;em$$$$$3','Leo Jon','serveur');
 insert into serveur values(5,'user5@mail.com','$mm#;em$$$$$4','Dean Geak','gestionnaire');
-insert into serveur values(6,'test','test','Jean','Dujardin');
+insert into serveur values(6,'test','test','Jean','gestionnaire');
+insert into serveur values(7,'test2','test2','Jean','serveur');
 
 
 -- Table reservation
