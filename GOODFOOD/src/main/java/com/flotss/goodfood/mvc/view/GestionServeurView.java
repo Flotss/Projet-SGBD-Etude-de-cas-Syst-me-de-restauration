@@ -2,6 +2,7 @@ package com.flotss.goodfood.mvc.view;
 
 import com.flotss.goodfood.GoodFoodApplication;
 import com.flotss.goodfood.mvc.controller.AddServeurButtonController;
+import com.flotss.goodfood.mvc.controller.AffectationServeurButtonController;
 import com.flotss.goodfood.mvc.controller.UpdateServeurButtonController;
 import com.flotss.goodfood.mvc.utils.ComposantUtils;
 import javafx.scene.control.Button;
@@ -49,10 +50,21 @@ public class GestionServeurView extends VBox {
                 for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
                     ligne.getChildren().add(ComposantUtils.createTextField(resultSet.getString(i + 1), 15));
                 }
+
+                // Mise à jour et suppression
                 Button updateButton = new Button("Mettre à jour");
                 updateButton.setOnAction(new UpdateServeurButtonController(ligne, errorSuccessLabel, this));
+                Button supprButton = new Button("Supprimer");
+                supprButton.setOnAction(new UpdateServeurButtonController(ligne, errorSuccessLabel, this));
 
-                ligne.getChildren().add(updateButton);
+                // Affectation des tables
+                Button affectationButton = new Button("Affecter");
+                affectationButton.setOnAction(new AffectationServeurButtonController(resultSet.getString(1), resultSet.getString(3)));
+
+
+
+
+                ligne.getChildren().addAll(updateButton, supprButton, affectationButton);
                 resultat.getChildren().add(ligne);
             }
         } catch (SQLException e) {

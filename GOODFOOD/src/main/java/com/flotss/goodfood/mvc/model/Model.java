@@ -3,10 +3,7 @@ package com.flotss.goodfood.mvc.model;
 import com.flotss.goodfood.database.DBConnection;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +58,6 @@ public class Model {
         int numRes = resultSet.getInt(1) + 1;
 
         // Insertion de la réservation
-        // TODO : METTRE A JOUR LA STATE SUIVANTE AVEC LES BONNES COLONNES
         preparedStatement = dbConnection.prepareStatement("INSERT INTO RESERVATION (numres, numtab, DATRES, NBPERS) VALUES (?,?, to_date( ? ,'yyyy-mm-dd hh24:mi'),?)");
         preparedStatement.setInt(1, numRes);
         preparedStatement.setInt(2, numTable);
@@ -103,6 +99,17 @@ public class Model {
 
     public List<String> getPlatsToList() throws SQLException {
         PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT LIBELLE FROM PLAT ORDER BY CASE WHEN TYPE = 'Entree' THEN 1 WHEN TYPE = 'Plat' THEN 2 WHEN TYPE = 'Viande' THEN 3 WHEN TYPE = 'Poisson' THEN 4 WHEN TYPE = 'Fromage' THEN 5 WHEN TYPE = 'Dessert' THEN 6 END");
+        preparedStatement.execute();
+        ResultSet resultSet = preparedStatement.getResultSet();
+        List<String> plats = new ArrayList<>();
+        while (resultSet.next()) {
+            plats.add(resultSet.getString(1));
+        }
+        return plats;
+    }
+
+    public List<String> getTypePlatsToList() throws SQLException {
+        PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT DISTINCT TYPE FROM PLAT ORDER BY TYPE");
         preparedStatement.execute();
         ResultSet resultSet = preparedStatement.getResultSet();
         List<String> plats = new ArrayList<>();
@@ -189,7 +196,7 @@ public class Model {
 
         // Ajout du serveur
         preparedStatement = dbConnection.prepareStatement("INSERT INTO SERVEUR (NUMSERV, EMAIL, PASSWD, NOMSERV, GRADE) VALUES (?,?,?,?,?)");
-        preparedStatement.setInt   (1, numServ);
+        preparedStatement.setInt(1, numServ);
         preparedStatement.setString(2, email);
         preparedStatement.setString(3, password);
         preparedStatement.setString(4, nomserv);
@@ -197,5 +204,86 @@ public class Model {
         preparedStatement.executeUpdate();
         dbConnection.commit();
 
+    }
+
+    public boolean deleteServeur(int numServ) {
+        try {
+            PreparedStatement preparedStatement = dbConnection.prepareStatement("DELETE FROM SERVEUR WHERE NUMSERV = ?");
+            preparedStatement.setInt(1, numServ);
+            preparedStatement.executeUpdate();
+            dbConnection.commit();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
+    public void supprimerAffectationServeur(int numTab, Date date, int numServ) throws SQLException {
+        PreparedStatement preparedStatement = dbConnection.prepareStatement("DELETE FROM AFFECTER WHERE NUMTAB = ? AND DATAFF = ? AND NUMSERV = ?");
+        preparedStatement.setInt(1, numTab);
+        preparedStatement.setDate(2, date);
+        preparedStatement.setInt(3, numServ);
+        preparedStatement.executeUpdate();
+        dbConnection.commit();
+    }
+
+    public void addPlat(String libelle, String type, String prix, String quantite) throws SQLException {
+        // On cherche le numéro du plat max
+        PreparedStatement statementNumPlat = dbConnection.prepareStatement("SELECT MAX(NUMPLAT) FROM PLAT");
+        statementNumPlat.execute();
+        ResultSet resultSet = statementNumPlat.getResultSet();
+        resultSet.next();
+        int numPlat = resultSet.getInt(1) + 1;
+
+        // Verification que le plat n'existe pas déjà
+        PreparedStatement statementPlat = dbConnection.prepareStatement("SELECT NUMPLAT FROM PLAT WHERE LIBELLE = ?");
+        statementPlat.setString(1, libelle);
+        statementPlat.execute();
+        resultSet = statementPlat.getResultSet();
+        if (resultSet.next()) {
+            throw new SQLException("Le plat existe déjà");
+        }
+
+
+        PreparedStatement statementInsertPlat = dbConnection.prepareStatement("INSERT INTO PLAT VALUES (?,?,?,?,?)");
+        statementInsertPlat.setInt(1, numPlat);
+        statementInsertPlat.setString(2, libelle);
+        statementInsertPlat.setString(3, type);
+        statementInsertPlat.setDouble(4, Double.parseDouble(prix));
+        statementInsertPlat.setInt(5, Integer.parseInt(quantite));
+        statementInsertPlat.executeUpdate();
+        dbConnection.commit();
+    }
+
+    public void supprPlat(String libelle) throws SQLException { // TODO : PROBLEME DE FOREIGN KEY
+        PreparedStatement preparedStatement = dbConnection.prepareStatement("DELETE FROM PLAT WHERE LIBELLE = ?");
+        preparedStatement.setString(1, libelle);
+        preparedStatement.executeUpdate();
+        dbConnection.commit();
+    }
+
+    public void modifPlat(int numPlat, String libelle, String type, String prixUnit, String quantite) throws SQLException {
+        // Verification que le plat n'existe pas déjà
+        PreparedStatement statementPlat = dbConnection.prepareStatement("SELECT NUMPLAT FROM PLAT WHERE LIBELLE = ?");
+        statementPlat.setString(1, libelle);
+        statementPlat.execute();
+        ResultSet resultSet = statementPlat.getResultSet();
+        if (resultSet.next()) {
+            throw new SQLException("Le plat existe déjà");
+        }
+
+        // Mise à jour du plat
+        PreparedStatement pStatementUpdatePlat = dbConnection.prepareStatement("UPDATE PLAT SET LIBELLE = ?, TYPE = ?, PRIXUNIT = ?, QTESERVIE = ? WHERE NUMPLAT = ?");
+        pStatementUpdatePlat.setString(1, libelle);
+        pStatementUpdatePlat.setString(2, type);
+        pStatementUpdatePlat.setDouble(3, Double.parseDouble(prixUnit));
+        pStatementUpdatePlat.setInt(4, Integer.parseInt(quantite));
+        pStatementUpdatePlat.setInt(5, numPlat);
+
+        pStatementUpdatePlat.executeUpdate();
+        dbConnection.commit();
     }
 }

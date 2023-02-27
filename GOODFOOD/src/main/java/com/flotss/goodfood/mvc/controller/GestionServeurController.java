@@ -6,11 +6,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class GestionServeurController implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
