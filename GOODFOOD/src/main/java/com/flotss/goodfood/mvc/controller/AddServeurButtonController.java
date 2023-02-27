@@ -31,27 +31,26 @@ public class AddServeurButtonController implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         errorSuccessLabel.setVisible(true);
 
-        if(! verificationChamps()) {
+        if (!verificationChamps()) {
             errorSuccessLabel.setText("Veuillez remplir tous les champs");
             errorSuccessLabel.setTextFill(Color.RED);
             return;
         }
 
-        try{
+        try {
             GoodFoodApplication.MODEL.ajouterServeur(emailTF.getText(), nomServTF.getText(), gradeTF.getText(), mdpTF.getText());
             errorSuccessLabel.setText("Le serveur a bien été ajouté");
             errorSuccessLabel.setTextFill(Color.GREEN);
             gestionServeurView.update();
-        }catch (Exception e){
+        } catch (Exception e) {
             errorSuccessLabel.setText(e.getMessage());
             errorSuccessLabel.setTextFill(Color.RED);
         }
     }
 
-    private boolean verificationChamps(){
+    private boolean verificationChamps() {
         return !emailTF.getText().isEmpty() && !nomServTF.getText().isEmpty() && !gradeTF.getText().isEmpty() && !mdpTF.getText().isEmpty();
     }
-
 
 
 }

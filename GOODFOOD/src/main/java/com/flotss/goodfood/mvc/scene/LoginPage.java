@@ -54,7 +54,6 @@ class LoginPage extends BorderPane {
         identifiantBox.getChildren().addAll(identifiantLabel, identifiantField);
 
 
-
         HBox passwordBox = new HBox();
         passwordBox.setAlignment(Pos.CENTER);
         passwordBox.setSpacing(7);
@@ -74,7 +73,6 @@ class LoginPage extends BorderPane {
         passwordBox.addEventHandler(ActionEvent.ACTION, new LoginButtonController(identifiantField, passwordField, errorLabel));
         identifiantField.addEventHandler(ActionEvent.ACTION, new LoginButtonController(identifiantField, passwordField, errorLabel));
         loginButton.setOnAction(new LoginButtonController(identifiantField, passwordField, errorLabel));
-
 
 
         center.getChildren().addAll(centerTitle, errorLabel, identifiantBox, passwordBox, loginButton);

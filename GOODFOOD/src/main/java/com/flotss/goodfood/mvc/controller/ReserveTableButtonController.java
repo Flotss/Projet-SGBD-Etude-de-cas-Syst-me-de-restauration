@@ -31,45 +31,45 @@ public class ReserveTableButtonController implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         Model model = GoodFoodApplication.MODEL;
 
-        if (! verificationDonnee()) return;
+        if (!verificationDonnee()) return;
 
         try {
-            model.reserveTable(tableNumber.getValue(), datePickerTable.getValue()+" "+hourChoiceBox.getValue(), Integer.parseInt(numberPersonTextField.getText()));
+            model.reserveTable(tableNumber.getValue(), datePickerTable.getValue() + " " + hourChoiceBox.getValue(), Integer.parseInt(numberPersonTextField.getText()));
             successLabel.setVisible(true);
             errorLabel.setVisible(false);
             successLabel.setText("La table n°" + hourChoiceBox.getValue() + " a bien été réservée pour le " + datePickerTable.getValue());
         } catch (Exception e) {
             successLabel.setVisible(false);
             errorLabel.setVisible(true);
-            errorLabel.setText(e.getMessage()+"\nLa table n°" + tableNumber.getValue() + " n'a pas pu être réservée pour le " + datePickerTable.getValue() + " à " + hourChoiceBox.getValue() + ". Veuillez réessayer.");
+            errorLabel.setText(e.getMessage() + "\nLa table n°" + tableNumber.getValue() + " n'a pas pu être réservée pour le " + datePickerTable.getValue() + " à " + hourChoiceBox.getValue() + ". Veuillez réessayer.");
             e.printStackTrace();
         }
 
     }
 
 
-    private boolean verificationDonnee(){
-        if (hourChoiceBox.getValue().contains("Choisir une heure")){
+    private boolean verificationDonnee() {
+        if (hourChoiceBox.getValue().contains("Choisir une heure")) {
             errorLabel.setVisible(true);
             errorLabel.setText("Veuillez choisir une heure");
             return false;
-        }else{
+        } else {
             errorLabel.setVisible(false);
         }
 
-        if (tableNumber.getValue() == null){
+        if (tableNumber.getValue() == null) {
             errorLabel.setVisible(true);
             errorLabel.setText("Veuillez choisir une table");
             return false;
-        }else{
+        } else {
             errorLabel.setVisible(false);
         }
 
-        if (numberPersonTextField.getText().isEmpty()){
+        if (numberPersonTextField.getText().isEmpty()) {
             errorLabel.setVisible(true);
             errorLabel.setText("Veuillez indiquer le nombre de personnes");
             return false;
-        }else{
+        } else {
             errorLabel.setVisible(false);
         }
 

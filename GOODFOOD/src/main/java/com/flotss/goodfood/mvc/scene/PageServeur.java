@@ -3,9 +3,9 @@ package com.flotss.goodfood.mvc.scene;
 import com.flotss.goodfood.GoodFoodApplication;
 import com.flotss.goodfood.mvc.controller.ConsultPlatButtonController;
 import com.flotss.goodfood.mvc.controller.ConsultTablesButtonController;
-import com.flotss.goodfood.mvc.controller.ReservePlatButtonController;
 import com.flotss.goodfood.mvc.controller.ReserveTableButtonController;
 import com.flotss.goodfood.mvc.utils.ComposantUtils;
+import com.flotss.goodfood.mvc.view.ReservationPlatView;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -14,7 +14,6 @@ import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.List;
 
 
 class PageServeur extends Pane {
@@ -33,7 +32,7 @@ class PageServeur extends Pane {
 
         this.getChildren().add(logoutButton);
 
-        if (GoodFoodApplication.MODEL.isGestionnaire()){
+        if (GoodFoodApplication.MODEL.isGestionnaire()) {
             Button gestionnaireButton = new Button("Gestion");
             gestionnaireButton.setLayoutX(1125);
             gestionnaireButton.setLayoutY(10);
@@ -143,60 +142,11 @@ class PageServeur extends Pane {
 
 
         // Reservation d'un plat pour une réservation de table
-        VBox vBoxReserverPlat = ComposantUtils.createVBox(0);
-        vBoxReserverPlat.setLayoutX(500);
-        vBoxReserverPlat.setLayoutY(200);
+        ReservationPlatView reservationPlatView = new ReservationPlatView();
+        reservationPlatView.setLayoutX(500);
+        reservationPlatView.setLayoutY(200);
+        GoodFoodApplication.MODEL.addObserver(reservationPlatView);
 
-        Label reserverPlatLabel = ComposantUtils.createLabel("Réserver un plat", 15);
-        Label errorLabel3 = ComposantUtils.createLabel("", 12);
-        errorLabel3.setTextFill(Color.RED);
-        errorLabel3.setVisible(false);
-
-        HBox hBox3 = new HBox();
-
-        // Numéro de reservation
-        VBox vBoxNumberReservation = ComposantUtils.createVBox(5);
-        Label numberReservationLabel = ComposantUtils.createLabel("Numéro de réservation", 12);
-        ChoiceBox<Integer> numberReservationChBox = new ChoiceBox<>();
-        try {
-            numberReservationChBox.getItems().addAll(GoodFoodApplication.MODEL.getReservationToList());
-        } catch (SQLException e) {
-            GoodFoodApplication.STAGE.setScene(ScenesEnum.ERROR_SCENE.getScene());
-        }
-        vBoxNumberReservation.getChildren().addAll(numberReservationLabel, numberReservationChBox);
-
-        // Numéro de plat
-        VBox vBoxNumberPlat = ComposantUtils.createVBox(5);
-        Label platLabel = ComposantUtils.createLabel("Plat", 12);
-        ChoiceBox<String> platChBox = new ChoiceBox<>();
-        platChBox.setValue("Choisir un plat");
-        try {
-            List<String> plats = GoodFoodApplication.MODEL.getPlatsToList();
-            platChBox.getItems().addAll(plats);
-            platChBox.setValue(plats.get(0));
-        } catch (SQLException e) {
-            GoodFoodApplication.STAGE.setScene(ScenesEnum.ERROR_SCENE.getScene());
-        }
-        vBoxNumberPlat.getChildren().addAll(platLabel, platChBox);
-
-        // Quantité de plat
-        VBox vBoxQuantityPlat = ComposantUtils.createVBox(5);
-        Label quantityPlatLabel = ComposantUtils.createLabel("Quantité", 12);
-        TextField quantityPlatTextField = ComposantUtils.createNumberTextField("1", 12);
-        quantityPlatTextField.setPrefWidth(50);
-        vBoxQuantityPlat.getChildren().addAll(quantityPlatLabel, quantityPlatTextField);
-
-        Button reserverPlatButton = new Button("Réserver un plat");
-
-        Label successLabel2 = ComposantUtils.createLabel("", 12);
-        successLabel2.setTextFill(Color.GREEN);
-        successLabel2.setVisible(false);
-
-        reserverPlatButton.setOnAction(new ReservePlatButtonController(numberReservationChBox, platChBox, quantityPlatTextField, successLabel2, errorLabel3));
-
-        hBox3.getChildren().addAll(vBoxNumberReservation, vBoxNumberPlat, vBoxQuantityPlat);
-        vBoxReserverPlat.getChildren().addAll(reserverPlatLabel, errorLabel3, hBox3, successLabel2, reserverPlatButton);
-
-        this.getChildren().add(vBoxReserverPlat);
+        this.getChildren().add(reservationPlatView);
     }
 }

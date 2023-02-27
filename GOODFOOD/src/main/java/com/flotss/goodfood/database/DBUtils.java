@@ -20,11 +20,11 @@ public class DBUtils {
         VBox[] vBoxs = new VBox[metaData.getColumnCount()];
         for (int i = 1; i <= metaData.getColumnCount(); i++) {
 //            System.out.print(metaData.getColumnName(i) + "\t".repeat(3));
-            vBoxs[i-1] = new VBox();
-            vBoxs[i-1].getChildren().add(ComposantUtils.createLabel(metaData.getColumnName(i), 11));
-            vBoxs[i-1].setBorder(Border.stroke(Color.BLACK));
-            vBoxs[i-1].setPadding(new Insets(3));
-            vBoxs[i-1].setAlignment(Pos.CENTER);
+            vBoxs[i - 1] = new VBox();
+            vBoxs[i - 1].getChildren().add(ComposantUtils.createLabel(metaData.getColumnName(i), 11));
+            vBoxs[i - 1].setBorder(Border.stroke(Color.BLACK));
+            vBoxs[i - 1].setPadding(new Insets(3));
+            vBoxs[i - 1].setAlignment(Pos.CENTER);
         }
         hBoxMain.getChildren().addAll(vBoxs);
 
@@ -34,10 +34,10 @@ public class DBUtils {
 //                System.out.print(resultSet.getObject(i) + "\t".repeat(3));
 
                 // Verify if the object is null
-                if(resultSet.getObject(i) == null){
-                    vBoxs[i-1].getChildren().add(ComposantUtils.createLabel("NULL", 11));
-                }else{
-                    vBoxs[i-1].getChildren().add(ComposantUtils.createLabel(resultSet.getObject(i).toString(), 11));
+                if (resultSet.getObject(i) == null) {
+                    vBoxs[i - 1].getChildren().add(ComposantUtils.createLabel("NULL", 11));
+                } else {
+                    vBoxs[i - 1].getChildren().add(ComposantUtils.createLabel(resultSet.getObject(i).toString(), 11));
                 }
             }
             System.out.println();

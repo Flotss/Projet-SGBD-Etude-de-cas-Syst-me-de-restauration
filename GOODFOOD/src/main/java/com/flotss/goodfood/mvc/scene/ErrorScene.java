@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 public class ErrorScene extends BorderPane {
 
     public ErrorScene(String message) {
+        super();
         this.setCenter(ComposantUtils.createLabel(message, 30));
     }
 

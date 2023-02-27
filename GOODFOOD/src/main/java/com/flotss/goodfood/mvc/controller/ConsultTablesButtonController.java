@@ -9,18 +9,16 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.xml.sax.HandlerBase;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class ConsultTablesButtonController implements EventHandler<ActionEvent> {
 
-    private DatePicker datePickerTable;
-    private ChoiceBox<String> choiceBox;
-    private Label error;
+    private final DatePicker datePickerTable;
+    private final ChoiceBox<String> choiceBox;
+    private final Label error;
 
     public ConsultTablesButtonController(DatePicker datePickerTable, ChoiceBox<String> choiceBox, Label error) {
         this.datePickerTable = datePickerTable;
@@ -38,25 +36,27 @@ public class ConsultTablesButtonController implements EventHandler<ActionEvent> 
         String dateTime = date + " " + time;
         System.out.println(dateTime);
 
-        if (dateTime.contains("Choisir une heure")){
+        if (dateTime.contains("Choisir une heure")) {
             error.setVisible(true);
             error.setText("Veuillez choisir une heure");
             return;
-        }else{
+        } else {
             error.setVisible(false);
         }
 
         HBox resultat = null;
-        try{
+        try {
             PreparedStatement preparedStatement = GoodFoodApplication.MODEL.getDbConnection().
-                    prepareStatement("select numtab from tabl\n" +
-                                        "minus\n" +
-                                        "select numtab from reservation where datres = to_date( ? ,'yyyy/mm/dd hh24:mi')");
+                    prepareStatement("""
+                            select numtab from tabl
+                            minus
+                            select numtab from reservation where datres = to_date( ? ,'yyyy/mm/dd hh24:mi')
+                            """);
             preparedStatement.setString(1, dateTime);
             preparedStatement.executeQuery();
-            ResultSet  resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.getResultSet();
             resultat = DBUtils.dumpResultSet(resultSet);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

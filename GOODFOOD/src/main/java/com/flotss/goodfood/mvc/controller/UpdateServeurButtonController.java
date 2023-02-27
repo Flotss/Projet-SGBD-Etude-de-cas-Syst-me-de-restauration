@@ -31,13 +31,13 @@ public class UpdateServeurButtonController implements EventHandler<ActionEvent> 
         String nom = ((javafx.scene.control.TextField) ligne.getChildren().get(2)).getText();
         String grade = ((javafx.scene.control.TextField) ligne.getChildren().get(3)).getText();
 
-        if (((Button) event.getSource()).getText().equalsIgnoreCase("Supprimer")){
-            if (GoodFoodApplication.MODEL.deleteServeur(numServ)){
+        if (((Button) event.getSource()).getText().equalsIgnoreCase("Supprimer")) {
+            if (GoodFoodApplication.MODEL.deleteServeur(numServ)) {
                 errorSuccessLabel.setText("Le serveur a bien été supprimé");
                 errorSuccessLabel.setVisible(true);
                 errorSuccessLabel.setTextFill(Color.GREEN);
                 gestionServeurView.update();
-            }else{
+            } else {
                 errorSuccessLabel.setText("Le serveur n'a pas pu être supprimé");
                 errorSuccessLabel.setVisible(true);
                 errorSuccessLabel.setTextFill(Color.RED);
@@ -45,12 +45,12 @@ public class UpdateServeurButtonController implements EventHandler<ActionEvent> 
             return;
         }
 
-        if (GoodFoodApplication.MODEL.updateServeur(numServ, email, nom, grade)){
+        if (GoodFoodApplication.MODEL.updateServeur(numServ, email, nom, grade)) {
             errorSuccessLabel.setText("Le serveur a bien été modifié");
             errorSuccessLabel.setVisible(true);
             errorSuccessLabel.setTextFill(Color.GREEN);
             gestionServeurView.update();
-        }else{
+        } else {
             errorSuccessLabel.setText("Le serveur n'a pas pu être modifié");
             errorSuccessLabel.setVisible(true);
             errorSuccessLabel.setTextFill(Color.RED);

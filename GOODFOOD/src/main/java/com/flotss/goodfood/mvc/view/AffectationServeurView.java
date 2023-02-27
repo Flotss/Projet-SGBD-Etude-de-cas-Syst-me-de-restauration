@@ -16,7 +16,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 
-public class AffectationServeurView extends VBox{
+public class AffectationServeurView extends VBox implements Observateur {
 
     private final int numServ;
 
@@ -78,7 +78,7 @@ public class AffectationServeurView extends VBox{
     }
 
 
-    public void update(){
+    public void update() {
         affectations.getChildren().clear();
 
         // Les affectations du serveur

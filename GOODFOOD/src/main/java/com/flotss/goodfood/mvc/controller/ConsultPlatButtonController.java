@@ -10,19 +10,19 @@ import javafx.stage.Stage;
 
 public class ConsultPlatButtonController implements EventHandler<ActionEvent> {
 
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            Stage stage = new Stage();
-            stage.setTitle("Consultation des plats");
+    @Override
+    public void handle(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        stage.setTitle("Consultation des plats");
 
-            HBox resultat = null;
-            try {
-                resultat = DBUtils.dumpResultSet(GoodFoodApplication.MODEL.getPlats());
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-            stage.setScene(new Scene(resultat));
-            stage.show();
+        HBox resultat = null;
+        try {
+            resultat = DBUtils.dumpResultSet(GoodFoodApplication.MODEL.getPlats());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        stage.setScene(new Scene(resultat));
+        stage.show();
+    }
 }

@@ -19,7 +19,7 @@ public class DBConnection {
         loginServeur.setString(1, user);
         loginServeur.setString(2, password);
         ResultSet result = loginServeur.executeQuery();
-        if(!result.next()) {
+        if (!result.next()) {
             throw new SQLException("Email ou mot de passe incorrect");
         }
 
@@ -36,8 +36,8 @@ public class DBConnection {
 
         connection = DriverManager
                 .getConnection("jdbc:oracle:thin:@charlemagne.iutnc.univ-lorraine.fr:1521:infodb",
-                                userDB,
-                                passwordDB);
+                        userDB,
+                        passwordDB);
         ini.clear();
     }
 

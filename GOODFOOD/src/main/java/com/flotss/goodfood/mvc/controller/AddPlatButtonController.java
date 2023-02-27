@@ -22,7 +22,6 @@ public class AddPlatButtonController implements EventHandler<ActionEvent> {
     private final GestionPlatView gestionPlatView;
 
 
-
     public AddPlatButtonController(TextField libelle, ChoiceBox<String> type, TextField prix, TextField quantite, Label errorSuccess, GestionPlatView gestionPlatView) {
         super();
         this.libelle = libelle;
@@ -41,6 +40,7 @@ public class AddPlatButtonController implements EventHandler<ActionEvent> {
             errorSuccess.setText("Plat ajouté avec succès");
             errorSuccess.setTextFill(Color.GREEN);
             gestionPlatView.update();
+            clearFields();
         } catch (SQLException e) {
             e.getStackTrace();
             errorSuccess.setText("Erreur lors de l'ajout du plat");
@@ -52,16 +52,16 @@ public class AddPlatButtonController implements EventHandler<ActionEvent> {
     }
 
 
-    private void clearFields(){
+    private void clearFields() {
         libelle.setText("");
         type.setValue("");
         prix.setText("");
         quantite.setText("");
     }
 
-    private void verificationDonnees(){
+    private void verificationDonnees() {
         if (libelle.getText().isEmpty() || type.getValue().isEmpty() || prix.getText().isEmpty() || quantite.getText().isEmpty()
-                || !prix.getText().matches("[0-9]+") || !quantite.getText().matches("[0-9]+")){
+                || !prix.getText().matches("[0-9]+") || !quantite.getText().matches("[0-9]+")) {
             errorSuccess.setText("Veuillez remplir tous les champs");
             errorSuccess.setTextFill(Color.RED);
             throw new IllegalStateException("Veuillez remplir tous les champs");

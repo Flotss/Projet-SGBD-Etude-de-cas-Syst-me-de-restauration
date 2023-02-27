@@ -18,17 +18,17 @@ public class ReservePlatButtonController implements EventHandler<ActionEvent> {
     private final Label successLabel;
 
 
-     public ReservePlatButtonController(ChoiceBox<Integer> nbrBox, ChoiceBox<String> platBox, TextField quantityTextField, Label successLabel ,Label errorLabel) {
+    public ReservePlatButtonController(ChoiceBox<Integer> nbrBox, ChoiceBox<String> platBox, TextField quantityTextField, Label successLabel, Label errorLabel) {
         this.nbrBox = nbrBox;
         this.platBox = platBox;
         this.quantityTextField = quantityTextField;
         this.errorLabel = errorLabel;
         this.successLabel = successLabel;
-     }
+    }
 
     @Override
     public void handle(ActionEvent event) {
-        if (! verificationDonnee()) return;
+        if (!verificationDonnee()) return;
 
         try {
             GoodFoodApplication.MODEL.commanderPlat(nbrBox.getValue(), platBox.getValue(), Integer.parseInt(quantityTextField.getText()));
@@ -44,19 +44,19 @@ public class ReservePlatButtonController implements EventHandler<ActionEvent> {
     }
 
     private boolean verificationDonnee() {
-        if (nbrBox.getValue() == null){
+        if (nbrBox.getValue() == null) {
             errorLabel.setVisible(true);
             errorLabel.setText("Veuillez choisir un numéro de réservation");
             return false;
-        }else{
+        } else {
             errorLabel.setVisible(false);
         }
 
-        if (quantityTextField.getText().isEmpty()){
+        if (quantityTextField.getText().isEmpty()) {
             errorLabel.setVisible(true);
             errorLabel.setText("Veuillez choisir une quantité");
             return false;
-        }else{
+        } else {
             errorLabel.setVisible(false);
         }
 

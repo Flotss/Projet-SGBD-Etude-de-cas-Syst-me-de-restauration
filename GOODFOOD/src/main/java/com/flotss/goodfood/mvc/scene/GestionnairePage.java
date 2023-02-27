@@ -4,8 +4,10 @@ import com.flotss.goodfood.GoodFoodApplication;
 import com.flotss.goodfood.mvc.controller.GestionServeurController;
 import com.flotss.goodfood.mvc.utils.ComposantUtils;
 import com.flotss.goodfood.mvc.view.GestionPlatView;
+import com.flotss.goodfood.mvc.view.ReglementView;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -15,7 +17,7 @@ import java.sql.SQLException;
 
 class GestionnairePage extends Pane {
 
-    public GestionnairePage() {
+    public GestionnairePage() throws SQLException {
         super();
 
         // Boutton de déconnexion
@@ -77,5 +79,11 @@ class GestionnairePage extends Pane {
         this.getChildren().add(vBoxPlat);
 
 
+        // View pour regler les reservations
+        ReglementView reglementView = new ReglementView();
+        reglementView.setLayoutX(350);
+        reglementView.setLayoutY(50);
+        GoodFoodApplication.MODEL.addObserver(reglementView);
+        this.getChildren().add(reglementView);
     }
 }

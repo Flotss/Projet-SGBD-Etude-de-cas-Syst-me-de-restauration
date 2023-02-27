@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class GestionServeurView extends VBox {
+public class GestionServeurView extends VBox implements Observateur {
 
     private final Label errorSuccessLabel;
     private final VBox resultat;
@@ -60,8 +60,6 @@ public class GestionServeurView extends VBox {
                 // Affectation des tables
                 Button affectationButton = new Button("Affecter");
                 affectationButton.setOnAction(new AffectationServeurButtonController(resultSet.getString(1), resultSet.getString(3)));
-
-
 
 
                 ligne.getChildren().addAll(updateButton, supprButton, affectationButton);

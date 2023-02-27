@@ -14,6 +14,9 @@ public class GoodFoodApplication extends Application {
     public static Stage STAGE;
     public static Model MODEL;
 
+    public static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) throws IOException, SQLException, ClassNotFoundException {
@@ -25,10 +28,5 @@ public class GoodFoodApplication extends Application {
         stage.setTitle("GoodFood");
         stage.setScene(scene);
         stage.show();
-    }
-
-
-    public static void main(String[] args) {
-        launch();
     }
 }

@@ -1,8 +1,8 @@
 package com.flotss.goodfood.exception;
 
-public class DBConnectionException extends Exception{
+public class DBConnectionException extends Exception {
 
-        public DBConnectionException(String message) {
-            super(message);
-        }
+    public DBConnectionException(String message) {
+        super(message);
+    }
 }

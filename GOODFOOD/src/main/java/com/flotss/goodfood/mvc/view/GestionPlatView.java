@@ -6,9 +6,9 @@ import com.flotss.goodfood.mvc.utils.ComposantUtils;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
 import java.sql.Connection;
@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-public class GestionPlatView extends VBox {
+public class GestionPlatView extends VBox implements Observateur {
 
 
     private final VBox vPlats;
@@ -53,7 +53,7 @@ public class GestionPlatView extends VBox {
                 TextField[] textFields = new TextField[resultSet.getMetaData().getColumnCount() - 1];
                 HBox ligne = ComposantUtils.createHBox(5);
                 for (int i = 1; i < resultSet.getMetaData().getColumnCount(); i++) {
-                    TextField textField =  ComposantUtils.createTextField(resultSet.getString(i + 1), 15);
+                    TextField textField = ComposantUtils.createTextField(resultSet.getString(i + 1), 15);
                     textFields[i - 1] = textField;
                     ligne.getChildren().add(textField);
                 }
@@ -85,7 +85,7 @@ public class GestionPlatView extends VBox {
                 });
 
                 supprimerButton.setDisable(true);
-                ligne.getChildren().addAll(modifierButton ,supprimerButton);
+                ligne.getChildren().addAll(modifierButton, supprimerButton);
                 vPlats.getChildren().add(ligne);
             }
         } catch (SQLException e) {

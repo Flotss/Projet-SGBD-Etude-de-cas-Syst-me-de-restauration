@@ -1,6 +1,7 @@
 package com.flotss.goodfood.mvc.model;
 
 import com.flotss.goodfood.database.DBConnection;
+import com.flotss.goodfood.mvc.view.Observateur;
 
 import java.io.IOException;
 import java.sql.*;
@@ -9,8 +10,8 @@ import java.util.List;
 
 public class Model {
 
+    private final List<Observateur> observateurs = new ArrayList<>();
     private Connection dbConnection;
-
     private String gradePersonne;
 
     public Model() {
@@ -64,8 +65,9 @@ public class Model {
         preparedStatement.setString(3, dateTime);
         preparedStatement.setInt(4, nbrPersonne);
         preparedStatement.executeUpdate();
-
         dbConnection.commit();
+
+        notifyObservers();
     }
 
     public List<Integer> getTableToList() throws SQLException {
@@ -80,12 +82,30 @@ public class Model {
     }
 
     public List<Integer> getReservationToList() throws SQLException {
-        PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT NUMRES FROM RESERVATION ORDER BY DATRES");
+        PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT NUMRES FROM RESERVATION WHERE DATPAIE IS NULL ORDER BY DATRES");
         preparedStatement.execute();
         ResultSet resultSet = preparedStatement.getResultSet();
         List<Integer> reservations = new ArrayList<>();
         while (resultSet.next()) {
             reservations.add(resultSet.getInt(1));
+        }
+        return reservations;
+    }
+
+    public List<Integer> getReservationNotPayedToList() throws SQLException {
+        PreparedStatement preparedStatement = dbConnection.prepareStatement("SELECT NUMRES FROM RESERVATION WHERE DATPAIE IS NULL ORDER BY DATRES");
+        preparedStatement.execute();
+        ResultSet resultSet = preparedStatement.getResultSet();
+        List<Integer> reservations = new ArrayList<>();
+        while (resultSet.next()) {
+            int numRes = resultSet.getInt(1);
+            // On vérifique que la réservation est commandé quelque chose
+            preparedStatement = dbConnection.prepareStatement("SELECT * FROM COMMANDE WHERE NUMRES = ?");
+            preparedStatement.setInt(1, numRes);
+            preparedStatement.execute();
+            if (preparedStatement.getResultSet().next()) {
+                reservations.add(numRes);
+            }
         }
         return reservations;
     }
@@ -153,6 +173,7 @@ public class Model {
         preparedStatement.executeUpdate();
 
         dbConnection.commit();
+        notifyObservers();
     }
 
     public boolean isGestionnaire() {
@@ -203,7 +224,6 @@ public class Model {
         preparedStatement.setString(5, grade);
         preparedStatement.executeUpdate();
         dbConnection.commit();
-
     }
 
     public boolean deleteServeur(int numServ) {
@@ -256,6 +276,7 @@ public class Model {
         statementInsertPlat.setInt(5, Integer.parseInt(quantite));
         statementInsertPlat.executeUpdate();
         dbConnection.commit();
+        notifyObservers();
     }
 
     public void supprPlat(String libelle) throws SQLException { // TODO : PROBLEME DE FOREIGN KEY
@@ -263,6 +284,7 @@ public class Model {
         preparedStatement.setString(1, libelle);
         preparedStatement.executeUpdate();
         dbConnection.commit();
+        notifyObservers();
     }
 
     public void modifPlat(int numPlat, String libelle, String type, String prixUnit, String quantite) throws SQLException {
@@ -285,5 +307,57 @@ public class Model {
 
         pStatementUpdatePlat.executeUpdate();
         dbConnection.commit();
+        notifyObservers();
+    }
+
+    public void payerReservation(Integer numRes, String typePaiement, String montantWithSentence) throws SQLException {
+        // Trouver le montant de la commande avec un REGEX
+        String montant = montantWithSentence.replaceAll("[^0-9]", "");
+
+        // Mise à jour de la réservation
+        PreparedStatement updateReservation = dbConnection.prepareStatement("UPDATE RESERVATION SET MODPAIE = ?, DATPAIE = ?, MONTCOM = ? WHERE NUMRES = ?");
+        updateReservation.setString(1, typePaiement);
+        updateReservation.setDate(2, new Date(System.currentTimeMillis()));
+        updateReservation.setInt(3, Integer.parseInt(montant));
+        updateReservation.setInt(4, numRes);
+        updateReservation.executeUpdate();
+        dbConnection.commit();
+        notifyObservers();
+    }
+
+    public int getMontantCommande(int numRes) {
+        int montant = 0;
+        try {
+            PreparedStatement preparedStatement = dbConnection.prepareStatement("""
+                    select sum(prixUnit * quantite) as montant
+                        from reservation
+                        inner join commande c2 on reservation.numres = c2.numres
+                        inner join plat p2 on c2.numplat = p2.numplat
+                        where reservation.numres = ?
+                        group by reservation.numres""");
+            preparedStatement.setInt(1, numRes);
+            preparedStatement.execute();
+
+            // Recuperation du montant
+            ResultSet resultSet = preparedStatement.getResultSet();
+            resultSet.next();
+            System.out.println(resultSet);
+            montant = resultSet.getInt(1);
+
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return montant;
+    }
+
+    public void addObserver(Observateur o) {
+        observateurs.add(o);
+    }
+
+    public void notifyObservers() {
+        for (Observateur o : observateurs) {
+            o.update();
+        }
     }
 }
