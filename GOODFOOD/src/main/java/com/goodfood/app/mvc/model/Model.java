@@ -44,6 +44,7 @@ public class Model {
         resultSet.next();
         gradePersonne = resultSet.getString(1);
         System.out.println("Type de personne : " + gradePersonne);
+        notifyObservers();
     }
 
     /**
@@ -256,6 +257,10 @@ public class Model {
      * @return the boolean
      */
     public boolean isGestionnaire() {
+        if (gradePersonne == null) {
+            return false;
+        }
+
         return gradePersonne.equalsIgnoreCase("Gestionnaire");
     }
 

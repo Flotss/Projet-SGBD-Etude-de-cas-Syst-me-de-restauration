@@ -54,20 +54,24 @@ public class StatistiqueServeurView extends VBox implements Observateur {
 
     @Override
     public void update() {
-        ResultSet resultSet = GoodFoodApplication.MODEL.getStatsServeur(beginDate.getValue().toString(), endDate.getValue().toString());
         try {
+            ResultSet resultSet = GoodFoodApplication.MODEL.getStatsServeur(beginDate.getValue().toString(), endDate.getValue().toString());
             resServeurActif.getChildren().clear();
             resServeurActif.getChildren().add(DBUtils.dumpResultSet(resultSet));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        } catch (SQLException er) {
+            throw new RuntimeException(er);
+        } catch (NullPointerException er2) {
+            System.out.println(er2.getMessage());
 
-        ResultSet resultSet2 = GoodFoodApplication.MODEL.getServeurInactif(beginDate.getValue().toString(), endDate.getValue().toString());
-        try {
-            resServeurInactif.getChildren().clear();
-            resServeurInactif.getChildren().add(DBUtils.dumpResultSet(resultSet2));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            try {
+                ResultSet resultSet2 = GoodFoodApplication.MODEL.getServeurInactif(beginDate.getValue().toString(), endDate.getValue().toString());
+                resServeurInactif.getChildren().clear();
+                resServeurInactif.getChildren().add(DBUtils.dumpResultSet(resultSet2));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (NullPointerException e2) {
+                System.out.println(e2.getMessage());
+            }
         }
     }
 }

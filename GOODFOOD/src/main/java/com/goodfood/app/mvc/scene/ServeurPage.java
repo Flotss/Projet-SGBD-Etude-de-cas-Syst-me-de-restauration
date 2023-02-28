@@ -6,6 +6,7 @@ import com.goodfood.app.mvc.controller.ConsultTablesButtonController;
 import com.goodfood.app.mvc.controller.DisconnectButtonController;
 import com.goodfood.app.mvc.controller.ReserveTableButtonController;
 import com.goodfood.app.mvc.utils.ComposantUtils;
+import com.goodfood.app.mvc.view.ButtonGestionnaireView;
 import com.goodfood.app.mvc.view.ReservationPlatView;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -36,13 +37,9 @@ class ServeurPage extends Pane {
 
         this.getChildren().add(logoutButton);
 
-        if (GoodFoodApplication.MODEL.isGestionnaire()) {
-            Button gestionnaireButton = new Button("Gestion");
-            gestionnaireButton.setLayoutX(1125);
-            gestionnaireButton.setLayoutY(10);
-            gestionnaireButton.setOnAction(event -> GoodFoodApplication.STAGE.setScene(ScenesEnum.GESTIONNAIREPAGE.getScene()));
-            this.getChildren().add(gestionnaireButton);
-        }
+        ButtonGestionnaireView gestionnaireButton = new ButtonGestionnaireView("Gestion", 1125, 10);
+        GoodFoodApplication.MODEL.addObserver(gestionnaireButton);
+        this.getChildren().add(gestionnaireButton);
 
 
         // Consulter les tables disponibles
@@ -108,6 +105,8 @@ class ServeurPage extends Pane {
             numberTableChBox.getItems().addAll(GoodFoodApplication.MODEL.getTableToList());
         } catch (SQLException e) {
             GoodFoodApplication.STAGE.setScene(ScenesEnum.ERROR_SCENE.getScene());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         vBoxNumberTable.getChildren().addAll(numberTableLabel, numberTableChBox);
 

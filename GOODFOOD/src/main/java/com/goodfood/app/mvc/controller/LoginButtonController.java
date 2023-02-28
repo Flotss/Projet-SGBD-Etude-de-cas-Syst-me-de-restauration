@@ -41,6 +41,7 @@ public class LoginButtonController implements EventHandler<ActionEvent> {
             // Set stage in the middle of the screen with Screen.getPrimary().getVisualBounds().getWidth() and Screen.getPrimary().getVisualBounds().getHeight()
             GoodFoodApplication.STAGE.setX((Screen.getPrimary().getVisualBounds().getWidth() - GoodFoodApplication.STAGE.getWidth()) / 2);
             GoodFoodApplication.STAGE.setY((Screen.getPrimary().getVisualBounds().getHeight() - GoodFoodApplication.STAGE.getHeight()) / 2);
+            clearAllFields();
         } catch (SQLException e) {
             error.setVisible(true);
             error.setText(e.getMessage());
@@ -48,5 +49,14 @@ public class LoginButtonController implements EventHandler<ActionEvent> {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Clear all fields.
+     */
+    public void clearAllFields() {
+        username.clear();
+        password.clear();
+        error.setVisible(false);
     }
 }

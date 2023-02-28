@@ -80,6 +80,8 @@ public class ReservationPlatView extends VBox implements Observateur {
             platChBox.setValue(plats.get(0));
         } catch (SQLException e) {
             GoodFoodApplication.STAGE.setScene(ScenesEnum.ERROR_SCENE.getScene());
+        } catch (Exception e) {
+            platChBox.setValue(null);
         }
         try {
             List<Integer> reservations = GoodFoodApplication.MODEL.getReservationToList();
