@@ -52,9 +52,10 @@ public class DBConnection {
         Ini ini = new Ini(new File("GOODFOOD/src/main/resources/db_config.ini"));
         String userDB = ini.get("db", "username");
         String passwordDB = ini.get("db", "password");
+        String urlDB = ini.get("db", "url");
 
         connection = DriverManager
-                .getConnection("jdbc:oracle:thin:@charlemagne.iutnc.univ-lorraine.fr:1521:infodb",
+                .getConnection(urlDB,
                         userDB,
                         passwordDB);
         ini.clear();

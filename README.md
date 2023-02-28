@@ -1,10 +1,5 @@
-# Projet-SGBD-Etude-de-cas-Syst-me-de-restauration
-
-## Etudiant : Florian MANGIN
-
-Sure, here’s a sample README.md file that you can use to guide users on how to execute your Maven project:
-
 # GoodFoodApplication
+## Etudiant : Florian MANGIN
 
 ## Prérequis
 
@@ -13,11 +8,16 @@ Avant de pouvoir exécuter ce projet, vous devez avoir installé les éléments 
 - Java JDK 1.8 plus récent
 - Apache Maven 3.0 ou plus récent
 
+De plus la base de données est oracle, vous devez utilisez 
+
 ## Configuration
 ### Base de données
+
 Pour configurer la base de données, vous devez modifier le fichier `db_config.ini` dans le package `resources` et modifier les paramètres suivants :
-- `username` : l'adresse du serveur de base de données
-- `password` : le mot de passe de l'utilisateur de la base de données
+- `username` : votre username oracle
+- `password` : le mot de passe oracle
+
+Voire même - `url` : l'url de votre base de données
 
 De plus vous devez importer le fichier `DonnéesSQL.sql` dans votre base de données.
 
