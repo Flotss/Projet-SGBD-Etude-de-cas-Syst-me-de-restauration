@@ -3,6 +3,7 @@ package com.flotss.goodfood.mvc.scene;
 import com.flotss.goodfood.GoodFoodApplication;
 import com.flotss.goodfood.mvc.controller.ConsultPlatButtonController;
 import com.flotss.goodfood.mvc.controller.ConsultTablesButtonController;
+import com.flotss.goodfood.mvc.controller.DisconnectButtonController;
 import com.flotss.goodfood.mvc.controller.ReserveTableButtonController;
 import com.flotss.goodfood.mvc.utils.ComposantUtils;
 import com.flotss.goodfood.mvc.view.ReservationPlatView;
@@ -16,19 +17,22 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 
-class PageServeur extends Pane {
+/**
+ * The type Page serveur.
+ */
+class ServeurPage extends Pane {
 
-    public PageServeur() {
+    /**
+     * Instantiates a new Page serveur.
+     */
+    public ServeurPage() {
         super();
 
         // Boutton de déconnexion
         Button logoutButton = new Button("Déconnexion");
         logoutButton.setLayoutX(10);
         logoutButton.setLayoutY(10);
-        logoutButton.setOnAction(event -> {
-            GoodFoodApplication.STAGE.setScene(ScenesEnum.LOGIN.getScene());
-            GoodFoodApplication.MODEL.disconnectDB();
-        });
+        logoutButton.setOnAction(new DisconnectButtonController());
 
         this.getChildren().add(logoutButton);
 

@@ -2,6 +2,9 @@ package com.flotss.goodfood.component;
 
 import javafx.scene.control.TextField;
 
+/**
+ * The type Number text field.
+ */
 public class NumberTextField extends TextField {
 
     @Override
@@ -18,6 +21,12 @@ public class NumberTextField extends TextField {
         }
     }
 
+    /**
+        * Validate the text has been entered
+        *
+        * @param text the text
+        * @return the boolean
+        */
     private boolean validate(String text) {
         return text.matches("[0-9]*");
     }

@@ -16,12 +16,22 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * The type Affectation serveur view.
+ */
 public class AffectationServeurView extends VBox implements Observateur {
 
     private final int numServ;
 
     private final VBox affectations;
 
+    /**
+     * Instantiates a new Affectation serveur view.
+     *
+     * @param numServ    the num serv
+     * @param nomServeur the nom serveur
+     * @throws SQLException the sql exception
+     */
     public AffectationServeurView(int numServ, String nomServeur) throws SQLException {
         super();
         this.setPadding(new Insets(10));

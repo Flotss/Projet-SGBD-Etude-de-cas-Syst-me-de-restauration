@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
+/**
+ * The type Reserve plat button controller.
+ */
 public class ReservePlatButtonController implements EventHandler<ActionEvent> {
 
     private final ChoiceBox<Integer> nbrBox;
@@ -18,6 +21,15 @@ public class ReservePlatButtonController implements EventHandler<ActionEvent> {
     private final Label successLabel;
 
 
+    /**
+     * Instantiates a new Reserve plat button controller.
+     *
+     * @param nbrBox            the nbr box
+     * @param platBox           the plat box
+     * @param quantityTextField the quantity text field
+     * @param successLabel      the success label
+     * @param errorLabel        the error label
+     */
     public ReservePlatButtonController(ChoiceBox<Integer> nbrBox, ChoiceBox<String> platBox, TextField quantityTextField, Label successLabel, Label errorLabel) {
         this.nbrBox = nbrBox;
         this.platBox = platBox;
@@ -43,6 +55,11 @@ public class ReservePlatButtonController implements EventHandler<ActionEvent> {
         }
     }
 
+    /**
+        * Verification donnee
+        *
+        * @return the boolean
+        */
     private boolean verificationDonnee() {
         if (nbrBox.getValue() == null) {
             errorLabel.setVisible(true);

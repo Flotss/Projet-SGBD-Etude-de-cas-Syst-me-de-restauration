@@ -14,12 +14,22 @@ import javafx.stage.Stage;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * The type Consult tables button controller.
+ */
 public class ConsultTablesButtonController implements EventHandler<ActionEvent> {
 
     private final DatePicker datePickerTable;
     private final ChoiceBox<String> choiceBox;
     private final Label error;
 
+    /**
+     * Instantiates a new Consult tables button controller.
+     *
+     * @param datePickerTable the date picker table
+     * @param choiceBox       the choice box
+     * @param error           the error
+     */
     public ConsultTablesButtonController(DatePicker datePickerTable, ChoiceBox<String> choiceBox, Label error) {
         this.datePickerTable = datePickerTable;
         this.choiceBox = choiceBox;
@@ -34,7 +44,6 @@ public class ConsultTablesButtonController implements EventHandler<ActionEvent> 
         String date = datePickerTable.getValue().toString();
         String time = choiceBox.getValue();
         String dateTime = date + " " + time;
-        System.out.println(dateTime);
 
         if (dateTime.contains("Choisir une heure")) {
             error.setVisible(true);

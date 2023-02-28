@@ -11,6 +11,9 @@ import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
 
+/**
+ * The type Add plat button controller.
+ */
 public class AddPlatButtonController implements EventHandler<ActionEvent> {
 
     private final TextField libelle;
@@ -22,6 +25,16 @@ public class AddPlatButtonController implements EventHandler<ActionEvent> {
     private final GestionPlatView gestionPlatView;
 
 
+    /**
+     * Instantiates a new Add plat button controller.
+     *
+     * @param libelle         the libelle
+     * @param type            the type
+     * @param prix            the prix
+     * @param quantite        the quantite
+     * @param errorSuccess    the error success
+     * @param gestionPlatView the gestion plat view
+     */
     public AddPlatButtonController(TextField libelle, ChoiceBox<String> type, TextField prix, TextField quantite, Label errorSuccess, GestionPlatView gestionPlatView) {
         super();
         this.libelle = libelle;
@@ -51,7 +64,9 @@ public class AddPlatButtonController implements EventHandler<ActionEvent> {
         }
     }
 
-
+    /**
+        * Clear fields.
+        */
     private void clearFields() {
         libelle.setText("");
         type.setValue("");
@@ -59,6 +74,9 @@ public class AddPlatButtonController implements EventHandler<ActionEvent> {
         quantite.setText("");
     }
 
+    /**
+        * Verification donnees.
+        */
     private void verificationDonnees() {
         if (libelle.getText().isEmpty() || type.getValue().isEmpty() || prix.getText().isEmpty() || quantite.getText().isEmpty()
                 || !prix.getText().matches("[0-9]+") || !quantite.getText().matches("[0-9]+")) {

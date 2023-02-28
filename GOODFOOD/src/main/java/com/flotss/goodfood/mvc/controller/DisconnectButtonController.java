@@ -6,6 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Screen;
 
+/**
+ * The type Disconnect button controller.
+ */
 public class DisconnectButtonController implements EventHandler<ActionEvent> {
 
     @Override

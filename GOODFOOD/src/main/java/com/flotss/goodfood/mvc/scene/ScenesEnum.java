@@ -5,9 +5,26 @@ import javafx.scene.Scene;
 
 import java.sql.SQLException;
 
+/**
+ * The enum Scenes enum.
+ */
 public enum ScenesEnum {
+    /**
+     * Login scenes enum.
+     */
     LOGIN("login"),
-    PAGESERVEUR("pageserveur"), ERROR_SCENE("error_scene"), GESTIONNAIREPAGE("gestionnairepage");
+    /**
+     * Pageserveur scene enum.
+     */
+    PAGESERVEUR("pageserveur"),
+    /**
+     * Error scene enum.
+     */
+    ERROR_SCENE("error_scene"),
+    /**
+     * Gestionnairepage scene enum.
+     */
+    GESTIONNAIREPAGE("gestionnairepage");
 
     private final Scene scene;
 
@@ -17,7 +34,7 @@ public enum ScenesEnum {
                 this.scene = new Scene(new LoginPage(), 400, 250);
                 break;
             case "pageserveur":
-                this.scene = new Scene(new PageServeur(), 1200, 400);
+                this.scene = new Scene(new ServeurPage(), 1200, 400);
                 break;
             case "gestionnairepage":
                 try {
@@ -34,6 +51,11 @@ public enum ScenesEnum {
         }
     }
 
+    /**
+     * Gets scene.
+     *
+     * @return the scene
+     */
     public Scene getScene() {
         return this.scene;
     }

@@ -12,12 +12,18 @@ import javafx.scene.paint.Color;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * The type Reglement view.
+ */
 public class ReglementView extends VBox implements Observateur {
 
     private final ChoiceBox<Integer> cbReservation;
     private final Label montantApayer;
     private final Label errorSuccessLabel;
 
+    /**
+     * Instantiates a new Reglement view.
+     */
     public ReglementView() {
         super();
         this.setSpacing(5);

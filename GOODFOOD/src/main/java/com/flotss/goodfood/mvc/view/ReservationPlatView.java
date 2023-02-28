@@ -15,11 +15,17 @@ import javafx.scene.paint.Color;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * The type Reservation plat view.
+ */
 public class ReservationPlatView extends VBox implements Observateur {
 
     private final ChoiceBox<Integer> numberReservationChBox;
     private final ChoiceBox<String> platChBox;
 
+    /**
+     * Instantiates a new Reservation plat view.
+     */
     public ReservationPlatView() {
         super();
         // Réserver une table
@@ -77,7 +83,6 @@ public class ReservationPlatView extends VBox implements Observateur {
         }
         try {
             List<Integer> reservations = GoodFoodApplication.MODEL.getReservationToList();
-            System.out.println(reservations);
             numberReservationChBox.getItems().clear();
             numberReservationChBox.getItems().addAll(reservations);
             numberReservationChBox.setValue(reservations.get(0));

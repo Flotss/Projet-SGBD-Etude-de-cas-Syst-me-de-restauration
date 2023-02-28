@@ -17,12 +17,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Arrays;
 
+/**
+ * The type Gestion plat view.
+ */
 public class GestionPlatView extends VBox implements Observateur {
 
 
     private final VBox vPlats;
     private final Label errorSuccess;
 
+    /**
+     * Instantiates a new Gestion plat view.
+     *
+     * @throws SQLException the sql exception
+     */
     public GestionPlatView() throws SQLException {
         super();
         Label label = new Label("Gestion des plats");

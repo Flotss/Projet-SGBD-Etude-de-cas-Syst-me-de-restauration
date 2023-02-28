@@ -16,11 +16,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * The type Gestion serveur view.
+ */
 public class GestionServeurView extends VBox implements Observateur {
 
     private final Label errorSuccessLabel;
     private final VBox resultat;
 
+    /**
+     * Instantiates a new Gestion serveur view.
+     */
     public GestionServeurView() {
         super();
         VBox top = ComposantUtils.createVBox(5);

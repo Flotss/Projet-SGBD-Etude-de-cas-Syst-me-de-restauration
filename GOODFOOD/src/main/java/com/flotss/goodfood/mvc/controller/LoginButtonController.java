@@ -10,12 +10,22 @@ import javafx.stage.Screen;
 
 import java.sql.SQLException;
 
+/**
+ * The type Login button controller.
+ */
 public class LoginButtonController implements EventHandler<ActionEvent> {
 
     private final TextField username;
     private final TextField password;
     private final Label error;
 
+    /**
+     * Instantiates a new Login button controller.
+     *
+     * @param username the username
+     * @param password the password
+     * @param error    the error
+     */
     public LoginButtonController(TextField username, TextField password, Label error) {
         this.username = username;
         this.password = password;

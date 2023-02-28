@@ -9,6 +9,9 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+/**
+ * The type Reserve table button controller.
+ */
 public class ReserveTableButtonController implements EventHandler<ActionEvent> {
 
     private final ChoiceBox<Integer> tableNumber;
@@ -18,6 +21,16 @@ public class ReserveTableButtonController implements EventHandler<ActionEvent> {
     private final Label errorLabel;
     private final Label successLabel;
 
+    /**
+     * Instantiates a new Reserve table button controller.
+     *
+     * @param tableNumber           the table number
+     * @param datePickerTable       the date picker table
+     * @param hourChoiceBox         the hour choice box
+     * @param numberPersonTextField the number person text field
+     * @param errorLabel            the error label
+     * @param successLabel          the success label
+     */
     public ReserveTableButtonController(ChoiceBox<Integer> tableNumber, DatePicker datePickerTable, ChoiceBox<String> hourChoiceBox, TextField numberPersonTextField, Label errorLabel, Label successLabel) {
         this.tableNumber = tableNumber;
         this.datePickerTable = datePickerTable;
@@ -47,7 +60,11 @@ public class ReserveTableButtonController implements EventHandler<ActionEvent> {
 
     }
 
-
+    /**
+        * Verification donnee
+        *
+        * @return the boolean
+        */
     private boolean verificationDonnee() {
         if (hourChoiceBox.getValue().contains("Choisir une heure")) {
             errorLabel.setVisible(true);

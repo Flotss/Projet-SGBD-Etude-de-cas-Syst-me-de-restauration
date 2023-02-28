@@ -12,8 +12,18 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
+/**
+ * The type Db utils.
+ */
 public class DBUtils {
 
+    /**
+     * Dump result set h box.
+     *
+     * @param resultSet the result set
+     * @return the h box
+     * @throws SQLException the sql exception
+     */
     public static HBox dumpResultSet(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
         HBox hBoxMain = new HBox();
@@ -28,7 +38,6 @@ public class DBUtils {
         }
         hBoxMain.getChildren().addAll(vBoxs);
 
-        System.out.println();
         while (resultSet.next()) {
             for (int i = 1; i <= metaData.getColumnCount(); i++) {
 //                System.out.print(resultSet.getObject(i) + "\t".repeat(3));
@@ -40,8 +49,6 @@ public class DBUtils {
                     vBoxs[i - 1].getChildren().add(ComposantUtils.createLabel(resultSet.getObject(i).toString(), 11));
                 }
             }
-            System.out.println();
-
         }
         return hBoxMain;
     }

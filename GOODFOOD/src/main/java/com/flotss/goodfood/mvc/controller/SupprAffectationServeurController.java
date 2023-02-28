@@ -7,6 +7,9 @@ import javafx.event.EventHandler;
 
 import java.sql.Date;
 
+/**
+ * The type Suppr affectation serveur controller.
+ */
 public class SupprAffectationServeurController implements EventHandler<ActionEvent> {
 
     private final int numServ;
@@ -15,6 +18,14 @@ public class SupprAffectationServeurController implements EventHandler<ActionEve
     private final AffectationServeurView affectationServeurView;
 
 
+    /**
+     * Instantiates a new Suppr affectation serveur controller.
+     *
+     * @param numServ                the num serv
+     * @param numtab                 the numtab
+     * @param date                   the date
+     * @param affectationServeurView the affectation serveur view
+     */
     public SupprAffectationServeurController(int numServ, int numtab, Date date, AffectationServeurView affectationServeurView) {
         this.numServ = numServ;
         this.numTab = numtab;

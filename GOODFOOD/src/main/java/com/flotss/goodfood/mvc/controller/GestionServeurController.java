@@ -6,6 +6,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * The type Gestion serveur controller.
+ */
 public class GestionServeurController implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {

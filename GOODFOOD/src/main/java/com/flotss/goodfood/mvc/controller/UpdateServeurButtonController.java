@@ -9,6 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
+/**
+ * The type Update serveur button controller.
+ */
 public class UpdateServeurButtonController implements EventHandler<ActionEvent> {
 
     private final HBox ligne;
@@ -16,6 +19,13 @@ public class UpdateServeurButtonController implements EventHandler<ActionEvent> 
 
     private final GestionServeurView gestionServeurView;
 
+    /**
+     * Instantiates a new Update serveur button controller.
+     *
+     * @param ligne              the ligne
+     * @param errorSuccessLabel  the error success label
+     * @param gestionServeurView the gestion serveur view
+     */
     public UpdateServeurButtonController(HBox ligne, Label errorSuccessLabel, GestionServeurView gestionServeurView) {
         this.ligne = ligne;
         this.errorSuccessLabel = errorSuccessLabel;

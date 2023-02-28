@@ -8,11 +8,20 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
+/**
+ * The type Affectation serveur button controller.
+ */
 public class AffectationServeurButtonController implements EventHandler<ActionEvent> {
 
     private final int numServ;
     private final String nomServeur;
 
+    /**
+     * Instantiates a new Affectation serveur button controller.
+     *
+     * @param numServ    the num serv
+     * @param nomServeur the nom serveur
+     */
     public AffectationServeurButtonController(String numServ, String nomServeur) {
         this.numServ = Integer.parseInt(numServ);
         this.nomServeur = nomServeur;

@@ -8,6 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/**
+ * The type Consult plat button controller.
+ */
 public class ConsultPlatButtonController implements EventHandler<ActionEvent> {
 
     @Override

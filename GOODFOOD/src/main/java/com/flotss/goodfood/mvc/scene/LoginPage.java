@@ -15,8 +15,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * The type Login page.
+ */
 class LoginPage extends BorderPane {
 
+    /**
+     * Instantiates a new Login page.
+     */
     public LoginPage() {
         super();
 

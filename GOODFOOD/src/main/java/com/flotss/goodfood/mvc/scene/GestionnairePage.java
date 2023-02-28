@@ -1,10 +1,12 @@
 package com.flotss.goodfood.mvc.scene;
 
 import com.flotss.goodfood.GoodFoodApplication;
+import com.flotss.goodfood.mvc.controller.DisconnectButtonController;
 import com.flotss.goodfood.mvc.controller.GestionServeurController;
 import com.flotss.goodfood.mvc.utils.ComposantUtils;
 import com.flotss.goodfood.mvc.view.GestionPlatView;
 import com.flotss.goodfood.mvc.view.ReglementView;
+import com.flotss.goodfood.mvc.view.StatistiqueServeurView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,8 +17,16 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 
 
+/**
+ * The type Gestionnaire page.
+ */
 class GestionnairePage extends Pane {
 
+    /**
+     * Instantiates a new Gestionnaire page.
+     *
+     * @throws SQLException the sql exception
+     */
     public GestionnairePage() throws SQLException {
         super();
 
@@ -24,11 +34,7 @@ class GestionnairePage extends Pane {
         Button logoutButton = new Button("Déconnexion");
         logoutButton.setLayoutX(10);
         logoutButton.setLayoutY(10);
-        logoutButton.setOnAction(event -> {
-            GoodFoodApplication.STAGE.setScene(ScenesEnum.LOGIN.getScene());
-            GoodFoodApplication.MODEL.disconnectDB();
-        });
-
+        logoutButton.setOnAction(new DisconnectButtonController());
         this.getChildren().add(logoutButton);
 
         Button serviceButton = new Button("Service");
@@ -85,5 +91,20 @@ class GestionnairePage extends Pane {
         reglementView.setLayoutY(50);
         GoodFoodApplication.MODEL.addObserver(reglementView);
         this.getChildren().add(reglementView);
+
+
+        // Affichage (dans un ordre décroissant) du chiffre d’affaire et le nombre
+        // de commandes réalisés par chaque serveur (nom, chiffre d’affaire,
+        // nombre de commandes) en une période donnée (date début, date fin).
+        VBox vBoxStatsServeur = ComposantUtils.createVBox(5);
+        vBoxStatsServeur.setLayoutX(50);
+        vBoxStatsServeur.setLayoutY(200);
+
+        StatistiqueServeurView statistiqueServeurView = new StatistiqueServeurView();
+        GoodFoodApplication.MODEL.addObserver(statistiqueServeurView);
+        vBoxStatsServeur.getChildren().addAll(statistiqueServeurView);
+
+        this.getChildren().add(vBoxStatsServeur);
+
     }
 }
