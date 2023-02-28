@@ -5,7 +5,7 @@ module com.flotss.goodfood.goodfood {
     requires ojdbc8;
     requires ini4j;
 
-    opens com.flotss.goodfood to javafx.fxml;
-    exports com.flotss.goodfood;
+    opens com.goodfood.app to javafx.fxml;
+    exports com.goodfood.app;
 
 }

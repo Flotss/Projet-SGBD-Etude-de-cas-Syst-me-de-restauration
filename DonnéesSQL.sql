@@ -1,12 +1,10 @@
-select 'drop table ', table_name, 'cascade constraints;' from user_tables;
-drop table AFFECTER cascade constraints;
-drop table COMMANDE cascade constraints;
-drop table PLAT cascade constraints;
-drop table RESERVATION cascade constraints;
-drop table SERVEUR cascade constraints;
-drop table TABL cascade constraints;
-
-select * from reservation;
+-- select 'drop table ', table_name, 'cascade constraints;' from user_tables;
+-- drop table AFFECTER cascade constraints;
+-- drop table COMMANDE cascade constraints;
+-- drop table PLAT cascade constraints;
+-- drop table RESERVATION cascade constraints;
+-- drop table SERVEUR cascade constraints;
+-- drop table TABL cascade constraints;
 
 
 -- Table plat
@@ -156,12 +154,4 @@ insert into affecter values(15,'10/09/2021',3);
 insert into affecter values(16,'10/09/2021',3);
 insert into affecter values(10,'11/09/2021',1);
 
-commit;
 
-select numtab from tabl
-minus
-select numtab from reservation where datres = to_date('10/09/2021 19:00','dd/mm/yyyy hh24:mi');
-
-
-select *
-from reservation
