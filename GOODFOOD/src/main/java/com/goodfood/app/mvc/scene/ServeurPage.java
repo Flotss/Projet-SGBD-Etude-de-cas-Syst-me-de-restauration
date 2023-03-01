@@ -7,6 +7,7 @@ import com.goodfood.app.mvc.controller.DisconnectButtonController;
 import com.goodfood.app.mvc.controller.ReserveTableButtonController;
 import com.goodfood.app.mvc.utils.ComposantUtils;
 import com.goodfood.app.mvc.view.ButtonGestionnaireView;
+import com.goodfood.app.mvc.view.Observateur;
 import com.goodfood.app.mvc.view.ReservationPlatView;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
@@ -100,14 +101,22 @@ class ServeurPage extends Pane {
         // Numéro de table
         VBox vBoxNumberTable = ComposantUtils.createVBox(5);
         Label numberTableLabel = ComposantUtils.createLabel("Numéro de table", 12);
+
+
         ChoiceBox<Integer> numberTableChBox = new ChoiceBox<>();
-        try {
-            numberTableChBox.getItems().addAll(GoodFoodApplication.MODEL.getTableToList());
-        } catch (SQLException e) {
-            GoodFoodApplication.STAGE.setScene(ScenesEnum.ERROR_SCENE.getScene());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
+        Observateur observateur = new Observateur() {
+            @Override
+            public void update() {
+                numberTableChBox.getItems().clear();
+                try {
+                    numberTableChBox.getItems().addAll(GoodFoodApplication.MODEL.getTableToList());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        };
+        GoodFoodApplication.MODEL.addObserver(observateur);
         vBoxNumberTable.getChildren().addAll(numberTableLabel, numberTableChBox);
 
         // Nombre de personne à la table

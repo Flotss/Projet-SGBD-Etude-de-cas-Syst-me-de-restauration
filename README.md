@@ -29,6 +29,22 @@ git clone https://github.com/Flotss/Projet-SGBD-Etude-de-cas-Syst-me-de-restaura
 
 Ouvrez ce projet dans IntelliJ IDEA et exécutez la classe `GoodFoodApplication.java` dans le package `com.goodfood.app`.
 
+## Liste de fonctionnalité : 
+### Service
+- ✅ Connexion d'un serveur
+- ✅ Consulter les tables disponibles pour une date et heure donnée
+- ✅ Réserver une table pour une date et heure donnée
+- ✅ Consulter les plats disponibles
+- ✅ Commander un plat
+
+### Gestion
+
+- ✅ Création et mise à jour des informations des serveurs
+- ✅ Affectation des serveurs à des tables
+- ✅ Création et mise à jour des plats
+- ✅ Encaissement d'une commande
+- ✅ Affichage d'un classement des serveurs entre deux dates
+- ✅ Affichage des serveurs qui n'ont fait aucun chiffre d'affaires entre deux dates
 
 ## License
 
