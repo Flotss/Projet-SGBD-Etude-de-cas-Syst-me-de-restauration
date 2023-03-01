@@ -27,7 +27,6 @@ public class DBConnection {
         if (connection == null) {
             loadConnection();
         }
-        System.out.println("user : " + user + " password : " + password);
         PreparedStatement loginServeur = connection.prepareStatement("SELECT * FROM SERVEUR WHERE EMAIL = ? AND PASSWD = ?");
         loginServeur.setString(1, user);
         loginServeur.setString(2, password);
