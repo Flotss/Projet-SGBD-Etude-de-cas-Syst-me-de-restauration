@@ -29,6 +29,14 @@ git clone https://github.com/Flotss/Projet-SGBD-Etude-de-cas-Syst-me-de-restaura
 
 Ouvrez ce projet dans IntelliJ IDEA et exécutez la classe `GoodFoodApplication.java` dans le package `com.goodfood.app`.
 
+En utilisant la base sql donnée, on peut se connecter avec les identifiants suivants pour un gestionnaire :
+- username : `test`
+- password : `test`
+
+Et pour un serveur :
+- username : `test2`
+- password : `test2`
+
 ## Liste de fonctionnalité : 
 ### Service
 - ✅ Connexion d'un serveur
